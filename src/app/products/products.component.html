@@ -1,0 +1,27 @@
+<form class="d-flex justify-content-center align-items-center">
+  <label for="name">Product Name</label>
+  <input type="text" id="name" name="name" [(ngModel)]="productName" />
+  <label for="name">Price</label>
+  <input type="text" id="name" name="price" [(ngModel)]="productPrice" />
+  <label for="name">Product description</label>
+  <input type="textarea" id="name" name="desc" [(ngModel)]="productDesc" />
+  <label for="name">Product Image</label>
+  <input
+    type="file"
+    name="File upload"
+    (change)="fileInputClickedHandler($event)"
+  />
+  <input type="submit" value="Submit" (click)="saveDetails()" />
+</form>
+<div class="d-flex flex-column justify-content-center align-items-center pt-3">
+  <div
+    class="d-flex align-items-center"
+    *ngFor="let elem of data; let i = index"
+  >
+    <img [src]="elem.dataSource" alt="" class="list-img" />
+    <p>{{ elem.desc }}</p>
+    <p>{{ elem.price }}</p>
+    <p>{{ elem.name }}</p>
+    <p (click)="removeImg(i)">Remove</p>
+  </div>
+</div>

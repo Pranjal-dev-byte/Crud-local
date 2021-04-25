@@ -1,0 +1,25 @@
+.nav {
+  &__link {
+    &--route {
+      color: black;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    &--active {
+      padding: 14px 0;
+      border-bottom: 3px solid blue;
+    }
+  }
+  &__wrap {
+    height: 50px;
+    border-bottom: 1px solid black;
+    width: 100%;
+  }
+  &__brand {
+    &--img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}

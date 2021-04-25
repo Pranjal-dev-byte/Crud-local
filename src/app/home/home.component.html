@@ -1,0 +1,10 @@
+<div class="d-flex flex-column justify-content-center align-items-center pt-3">
+  <div
+    class="d-flex align-items-center"
+    *ngFor="let elem of data; let i = index"
+  >
+    <img [src]="elem.dataSource" alt="" class="list-img" />
+    <p>{{ elem.price }}</p>
+    <p>{{ elem.name }}</p>
+  </div>
+</div>
