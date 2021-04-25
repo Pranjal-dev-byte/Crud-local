@@ -1,27 +1,84 @@
-<form class="d-flex justify-content-center align-items-center">
-  <label for="name">Product Name</label>
-  <input type="text" id="name" name="name" [(ngModel)]="productName" />
-  <label for="name">Price</label>
-  <input type="text" id="name" name="price" [(ngModel)]="productPrice" />
-  <label for="name">Product description</label>
-  <input type="textarea" id="name" name="desc" [(ngModel)]="productDesc" />
-  <label for="name">Product Image</label>
-  <input
-    type="file"
-    name="File upload"
-    (change)="fileInputClickedHandler($event)"
-  />
-  <input type="submit" value="Submit" (click)="saveDetails()" />
+<form class="form d-flex flex-column align-items-center">
+  <div class="d-flex justify-content-between form__row">
+    <div class="form__field">
+      <label for="name">Product Name<sup>&#42;</sup></label>
+      <input
+        class="form__input"
+        type="text"
+        id="name"
+        name="name"
+        [(ngModel)]="productName"
+        placeholder="Enter product name"
+        required
+      />
+    </div>
+    <div class="form__field">
+      <label for="price">Price<sup>&#42;</sup></label>
+      <input
+        class="form__input"
+        type="text"
+        id="price"
+        name="price"
+        [(ngModel)]="productPrice"
+        placeholder="Enter price"
+        required
+      />
+    </div>
+  </div>
+  <div class="d-flex justify-content-between form__row">
+    <div class="form__field">
+      <label for="desc">Product description (Optional)</label>
+      <input
+        class="form__input"
+        type="textarea"
+        id="desc"
+        name="desc"
+        [(ngModel)]="productDesc"
+        placeholder="Enter description"
+      />
+    </div>
+    <div class="form__field">
+      <label for="img">Product Image (Optional)</label>
+      <input
+        class="form__input"
+        placeholder="Choose"
+        type="file"
+        name="File upload"
+        (change)="fileInputClickedHandler($event)"
+        #fileInput
+      />
+    </div>
+  </div>
+  <div class="d-flex justify-content-between form__row">
+    <input
+      type="submit"
+      class="form__submit"
+      value="Add product"
+      (click)="saveDetails()"
+    />
+  </div>
 </form>
 <div class="d-flex flex-column justify-content-center align-items-center pt-3">
-  <div
-    class="d-flex align-items-center"
-    *ngFor="let elem of data; let i = index"
-  >
-    <img [src]="elem.dataSource" alt="" class="list-img" />
-    <p>{{ elem.desc }}</p>
-    <p>{{ elem.price }}</p>
-    <p>{{ elem.name }}</p>
-    <p (click)="removeImg(i)">Remove</p>
-  </div>
+  <table class="table form__row">
+    <thead>
+      <tr>
+        <th scope="col">&nbsp;</th>
+        <th scope="col">Name</th>
+        <th scope="col">Descrpition</th>
+        <th scope="col">Price</th>
+        <th scope="col">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let elem of data; let i = index">
+        <th scope="row">
+          <img [src]="elem.dataSource" alt="" class="list-img" />
+        </th>
+        <td>{{ elem.name }}</td>
+        <td>{{ elem.desc }}</td>
+        <td>{{ elem.price }}</td>
+        <td class="form__remove" (click)="removeImg(i)">Remove</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

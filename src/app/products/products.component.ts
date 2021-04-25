@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-products',
@@ -9,6 +9,7 @@ export class ProductsComponent implements OnInit {
   fileDataUpload: any;
   uploadedFileName: any;
   dataSource: any;
+  @ViewChild('fileInput', { static: false }) fileInput1: ElementRef;
   images: any;
   productName: string;
   productPrice: string;
@@ -21,20 +22,26 @@ export class ProductsComponent implements OnInit {
     this.getDetails();
   }
   saveDetails() {
-    this.obj = {
-      name: this.productName,
-      desc: this.productDesc,
-      price: this.productPrice,
-      dataSource: this.fileDataUpload,
-    };
-    this.objArr.push(this.obj);
-    this.saveToStorage();
-    this.getDetails();
-    this.productName = null;
-    this.productDesc = null;
-    this.productPrice = null;
-    this.fileDataUpload = null;
-    this.obj = {};
+    if (!this.productName || !this.productPrice) {
+      return;
+    } else {
+      console.log('In else', this.productName);
+      this.obj = {
+        name: this.productName,
+        desc: this.productDesc,
+        price: this.productPrice,
+        dataSource: this.fileDataUpload,
+      };
+      this.objArr.push(this.obj);
+      this.saveToStorage();
+      this.getDetails();
+      this.productName = null;
+      this.productDesc = null;
+      this.productPrice = null;
+      this.fileDataUpload = null;
+      this.obj = {};
+      this.fileInput1.nativeElement.value = '';
+    }
   }
 
   fileInputClickedHandler(event): void {
